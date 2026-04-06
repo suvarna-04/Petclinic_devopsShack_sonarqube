@@ -15,7 +15,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/jaiswaladi246/Petclinic.git'
+                    url: 'https://github.com/suvarna-04/Petclinic_devopsShack_sonarqube.git'
             }
         }
 
@@ -53,7 +53,7 @@ pipeline {
         stage('Build') {
             steps {
                 bat '''
-                mvn clean install ^
+                mvn clean package ^
                 -Djavax.net.ssl.trustStoreType=Windows-ROOT
                 '''
             }
@@ -62,10 +62,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Build, Test, and SonarQube Analysis completed successfully'
+            echo '✅ Pipeline completed successfully'
         }
         failure {
-            echo '❌ Pipeline failed — check logs above'
+            echo '❌ Pipeline failed. Check logs above.'
         }
     }
 }
